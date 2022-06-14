@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.app-toolbar {
+    position: fixed;
+    position: -webkit-fixed; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}

@@ -1,0 +1,52 @@
+<div class="mat-elevation-z8 m-t-4">
+  <mat-form-field class="search-div" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput type="text" [(ngModel)]="value" (keyup)="filter()">
+    <mat-icon matSuffix *ngIf="!value">search</mat-icon>
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value='';filter()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" class="width100">
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell class="symbol" *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="percentage">
+      <th mat-header-cell *matHeaderCellDef> Percentage Change </th>
+      <td mat-cell *matCellDef="let element"> {{element.priceChangePercent}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastPrice">
+      <th mat-header-cell *matHeaderCellDef> Last Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastPrice}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef> Volume </th>
+      <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element">
+        <button class="btn btn-sm btn-success" *ngIf="!element.isBided" (click)="placeBid(element)">Place Bid</button>
+        
+        <button class="btn btn-sm btn-danger" *ngIf="element.isBided" (click)="cancelBid(element)">Cancel Bid</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[25, 100, 200]" class="mat-paginator-sticky" showFirstLastButtons
+    aria-label="Select page of elements">
+  </mat-paginator>
+</div>
+
+<div class="m-t-4" *ngIf="isLoading">
+  <mat-progress-spinner>
+  </mat-progress-spinner>
+</div>

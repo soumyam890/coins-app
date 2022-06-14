@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Cancel Bid</h1>
+<div mat-dialog-content>
+    Would you like to cancel bid for {{coinData.symbol}}
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">No</button>
+    <button mat-button (click)="confirm()" cdkFocusInitial>Yes</button>
+</div>

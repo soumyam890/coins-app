@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Place Bid: {{coinData.symbol}}</h2>
+<div class="row">
+    <div class="col-5">
+        <h4>Coin Details</h4>
+        <div class="unit">
+            Available Quantity:<span class="value"> {{coinData.lastQty}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="unit">
+            Last Price: <span class="value"> {{coinData.lastPrice}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="unit">
+            Price Change: <span class="value"> {{coinData.priceChange}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="unit">
+            Weighted Avg Price: <span class="value"> {{coinData.weightedAvgPrice}}</span>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+    <mat-dialog-content class="col-7">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+            <mat-form-field class="form-element">
+                <input matInput type="number" placeholder="Quantity" formControlName="qty">
+                <span *ngIf="formGroup.get('qty').errors?.min">
+                    Quantity cannot be more than {{ initialValue }}. 
+               </span>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <input matInput placeholder="Price For buy" formControlName="priceForBuy">
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <input matInput placeholder="Price for Sell" formControlName="priceForSell">
+            </mat-form-field>
+
+            <div class="form-element">
+                <button mat-raised-button color="primary" type="submit" class="button"
+                    [disabled]="!formGroup.valid">Place Bid</button>
+                <button mat-button (click)="close()">Cancel</button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>
